@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    {% block static %}{% endblock %}
+</head>
+<body>
+    <header>
+        <nav>
+        <a href="{% url 'homepage' %}">Home</a>
+        <a href="{% url 'courses:list' %}">Courses</a>
+        </nav>
+        {% block header-content %}
+        {% endblock %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                    {{ message }}
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </header>
+    <section>
+        {% block section-content %}
+        {% endblock %}
+    </section>
+    <footer>
+        <p>&copy; 2017 School of mathematics</p>
+    </footer>
+</body>
+</html>

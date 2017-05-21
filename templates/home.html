@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+
+{% block title %}
+    School of mathematics
+{% endblock %}
+{% block header-content %}
+    <h1>Welcome to the school of Mathematics</h1>
+    <h2>The wonderful place where we will learn ins and outs of elementary math through fun games and quizes</h2>
+{% endblock %}
+{% block section-content %}
+    <h2>At the moment we have {{ courses.count|apnumber }} courses available</h2>
+    <h3>Some of our most recent courses, that were published this month are:</h3>
+    <nav>
+        <ul>
+            {% for course in courses %}
+                <li>
+                    {% now "F" as current_month %}
+                    {% if current_month == course.created_at|date:'F' %}
+                        {{ course }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+    <nav>
+        <h3>You can see the list of all available courses <a href="{% url 'courses:list' %}"> here</a></h3>
+    </nav>
+{% endblock %}

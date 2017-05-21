@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% load embed_video_tags %}
+
+
+{% block title %}
+    {{ video.title }} - {{ video.course.title }}
+{% endblock %}
+
+{% block header-content %}
+    <h2><a href="{% url 'courses:detail' pk=video.course.pk %}">{{ video.course.title }}</a></h2>
+    <h3>{{ video.title }}</h3>
+    {% with desc=video.description %}
+        {{ desc|linebreaks }}
+    {% endwith %}
+    <br>
+    {% video video.video_url as my_video %}
+        {% video my_video "large" %}
+    {% endvideo %}
+{% endblock %}
+
+{% block section-content %}
+    <h3>Now that test your knowledge <a href="{{ quiz.get_absolute_url }}">here</a></h3>
+{% endblock %}
+
+
+

@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+
+{% block title %}
+    {{ quiz.title }} - {{ quiz.course.title }}
+{% endblock %}
+
+{% block header-content %}
+    <h2><a href="{% url 'courses:detail' pk=quiz.course.pk %}">{{ quiz.course.title }}</a></h2>
+{% endblock %}
+
+{% block section-content %}
+    <div class="row columns">
+        <article>
+            <h1>{{ quiz.title }}</h1>
+            <ul>
+                {% for question in quiz.question_set.all %}
+                <li>
+                    <h2>{{ question.prompt }}</h2>
+                    {% for answer in question.answer_set.all %}
+                        <div>{{ answer.text }}</div>
+                    {% endfor %}
+                </li>
+                {% endfor %}
+            </ul>
+        </article>
+    </div>
+    <nav>
+        <h3>Go back to <a href="{% url 'courses:detail' pk=quiz.course.pk %}">{{ quiz.course.title }}</a> course</h3>
+    </nav>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% load embed_video_tags %}
+{% load humanize %}
+
+
+{% block title %}
+    {{ course.title }}
+{% endblock %}
+
+{% block header-content %}
+    <h2>{{ course.title }}</h2>
+    {{ course.description }}
+
+    <p>There {{ course.video_set.count|pluralize:'is, are' }} {{ course.video_set.count|apnumber }}
+        step{{ course.video_set.count|pluralize }} in this course: {{ course.video_set.all|join:', ' }}</p>
+
+    {% for step in steps %}
+    <h3><a href="{{ step.get_absolute_url }}">{{ step.title }}</a></h3>
+        {{ step.description }}
+    {% endfor %}
+{% endblock %}
+

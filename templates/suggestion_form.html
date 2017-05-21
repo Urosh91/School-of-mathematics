@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block title %}Suggestion{% endblock %}
+
+{% block header-content %}
+    <h1>Suggest a course</h1>
+    <h2>Is there a course on a particular subject you would like to see in here? Feel free to leave your
+        suggestion, your opinion matters to us</h2>
+{% endblock %}
+
+{% block section-content %}
+    <div>
+        <form action="" method="POST">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit">
+        </form>
+    </div>
+{% endblock %}
