@@ -24,6 +24,6 @@
         </ul>
     </nav>
     <nav>
-        <h3>You can see the list of all available courses <a href="{% url 'courses:list' %}"> here</a></h3>
+        {{ block.super }}
     </nav>
 {% endblock %}

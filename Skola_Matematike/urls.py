@@ -18,9 +18,14 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from . import views
+from accounts.views import login_view, register_view, logout_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    # url(r'^accounts/', include('acounts.urls', namespace='accounts')),
+    url(r'^login/', login_view, name='login'),
+    url(r'^logout/', logout_view, name='logout'),
+    url(r'^register/', register_view, name='register'),
     url(r'^courses/', include('courses.urls', namespace='courses')),
     url(r'^suggestion/$', views.suggestion_view, name='suggestion'),
     url(r'$', views.welcome, name='homepage'),

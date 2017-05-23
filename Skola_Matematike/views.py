@@ -3,6 +3,8 @@ from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
 
 from courses import models
 from . import forms
@@ -13,6 +15,7 @@ def welcome(request):
     return render(request, 'home.html', {'courses': courses})
 
 
+@login_required#(login_url='/login/')
 def suggestion_view(request):
     form = forms.SuggestionForm()
     if request.method == 'POST':

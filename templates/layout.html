@@ -13,6 +13,13 @@
         <nav>
         <a href="{% url 'homepage' %}">Home</a>
         <a href="{% url 'courses:list' %}">Courses</a>
+
+        {% if not request.user.is_authenticated %}
+        <a href="{% url 'login' %}">Log In</a>
+        <a href="{% url 'register' %}">Register</a>
+        {% else %}
+        <a href="{% url 'logout' %}">Log Out</a>
+        {% endif %}
         </nav>
         {% block header-content %}
         {% endblock %}
@@ -29,6 +36,11 @@
     </header>
     <section>
         {% block section-content %}
+            <h3>You can see the list of all available courses <a href="{% url 'courses:list' %}"> here</a></h3>
+            <div>
+                <h3>Also if you would like to suggest what course we should do next feel free to leave your
+                    suggestion <a href="{% url 'suggestion'%}">here</a><h3>
+            </div>
         {% endblock %}
     </section>
     <footer>
