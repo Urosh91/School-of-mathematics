@@ -1,33 +1,95 @@
 {% extends 'layout.html' %}
 {% load static %}
 
-{% block static %}
-<link rel="stylesheet" href="{% static 'courses/css/courses.css' %}">
-{% endblock %}
 {% block title %}
     Available Courses
 {% endblock %}
+
+
 {% block header-content %}
-    <h1>Welcome to the school of Mathematics</h1>
-    <h2>The wonderful place where we will learn ins and outs of elementary math through fun games and quizes</h2>
+<div class="container">
+    <div class="page-header">
+        <h2
+          class="text-center text-primary">
+
+            Welcome to the school of Mathematics
+        </h2>
+
+        <smal>
+            <p
+              class="text-center text-primary lead">
+
+                The wonderful place where we will learn ins and outs of elementary math
+                <br>
+                through fun games and quizes
+            </p>
+        </smal>
+    </div>
+</div>
 {% endblock %}
+
 {% block section-content %}
-    <p>List of all the available courses</p>
-    <nav>
-        <ul>
+
+    <div
+      class="text-center">
+
+        <h2 class="courses-punch">
+            List of all the available courses
+        </h2>
+
+        <div class="courses">
             {% for course in courses %}
-                <li>
-                    <h2><a href="{% url 'courses:detail' pk=course.pk %}">{{ course.title }}</a></h2>
-                    {% if course.description|wordcount <= 5 %}
-                        <h3>{{ course.description }}</h3>
-                    {% else %}
-                        <h3>{{ course.description|truncatewords:5 }}</h3>
-                        <a href="{% url 'courses:detail' pk=course.pk %}">Read More</a>
-                    {% endif %}
-                    <div>Created on: {{ course.created_at|date:'F j, Y' }}</div>
-                </li>
+
+                <div
+                  class="panel panel-dafault">
+                    <div
+                        class="panel-heading">
+                        <h3
+                            class="padding-title">
+
+                            <a
+                              class="text-center"
+                              href="{% url 'courses:detail' pk=course.pk %}">
+
+                                {{ course.title }}
+                            </a>
+                        </h3>
+                    </div>
+
+                    <div
+                      class="panel-body">
+                        {% if course.description|wordcount <= 5 %}
+                            <h3>
+                                {{ course.description }}
+                            </h3>
+
+                        {% else %}
+                            <h3>
+                                {{ course.description|truncatewords:5 }}
+                            </h3>
+                            <a
+                              href="{% url 'courses:detail' pk=course.pk %}">
+                                Read More
+                            </a>
+                        {% endif %}
+                        <br>
+                        <div>Created on: {{ course.created_at|date:'F j, Y' }}</div>
+                    </div>
+                </div>
             {% endfor %}
-        </ul>
-    </nav>
-    <div>Have questions? Contanct me at {{ email|urlize }}</div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="email-contact">
+
+        <p class="line"></p>
+
+        <p
+          class="text-center email-contact">
+
+            Have questions? Contact me at <span>{{ email|urlize }}</span>
+        </p>
+    </div>
 {% endblock %}
