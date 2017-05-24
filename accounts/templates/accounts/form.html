@@ -1,13 +1,46 @@
 {% extends 'layout.html' %}
 
-{% block title %}{{ title }}{% endblock %}
+{% block title %}
+    {{ title }}
+{% endblock %}
 
 {% block header-content %}
     <div>
-        <h1>{{ title }}</h1>
+        <!--<h1>{{ title }}</h1>-->
+    </div>
+    <div class="container">
+        <div class="page-header">
+            <h2
+              class="text-center text-primary">
+
+                Welcome to the school of Mathematics
+            </h2>
+
+            <smal>
+                <p
+                  class="text-center text-primary lead">
+
+                    The wonderful place where we will learn ins and outs of elementary math
+                    <br>
+                    through fun games and quizes
+                </p>
+            </smal>
+        </div>
     </div>
 {% endblock %}
+
 {% block section-content %}
+
+<div>
+
+    <p
+      class="lead text-center text-info">
+
+        To continue your journey, please <a href="{% url 'login' %}">log-in</a> to your account first
+        <br>
+        or <a href="{% url 'register' %}">register</a> if you're a new user.
+    </p>
+</div>
     <form method="POST">
         {% csrf_token %}
         {{ form }}

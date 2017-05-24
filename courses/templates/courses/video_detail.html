@@ -7,20 +7,52 @@
 {% endblock %}
 
 {% block header-content %}
-    <h2><a href="{% url 'courses:detail' pk=video.course.pk %}">{{ video.course.title }}</a></h2>
-    <h3>{{ video.title }}</h3>
-    {% with desc=video.description %}
-        {{ desc|linebreaks }}
-    {% endwith %}
+    <h2
+      class="text-center text-primary">
+
+        <a
+          href="{% url 'courses:detail' pk=video.course.pk %}">
+
+            {{ video.course.title }}
+        </a>
+    </h2>
+
+    <hr>
     <br>
+
+    <h3
+        class="lead text-center">{{ video.title }}</h3>
+        {% with desc=video.description %}
+            <p
+              class="text-center">
+                {{ desc }}
+            </p>
+        {% endwith %}
+    </h3>
+
+    <br>
+    <p class="line"></p>
+    <br>
+
     {% video video.video_url as my_video %}
-        {% video my_video "large" %}
+        <div
+            class="videoWrapper">
+
+            {% video my_video "large" %}
+        </div>
     {% endvideo %}
+
 {% endblock %}
 
 {% block section-content %}
-    <h3>Now that you're set up and ready we suggest you to test your knowledge
-        <a href="{{ quiz.get_absolute_url }}">here</a></h3>
+    <p class="line"></p>
+    <p
+      class="lead text-center">
+        Now that you're set up and ready
+        <br>
+        we suggest you to test your knowledge <a href="{{ quiz.get_absolute_url }}">here.</a></p>
+    <br>
+    <br>
 {% endblock %}
 
 
