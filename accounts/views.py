@@ -1,6 +1,5 @@
 from django.contrib.auth import (
     authenticate,
-    get_user_model,
     login,
     logout
 )
