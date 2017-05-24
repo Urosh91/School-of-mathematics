@@ -5,46 +5,148 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/layout.css' %}">
     {% block static %}{% endblock %}
 </head>
 <body>
-    <header>
-        <nav>
-        <a href="{% url 'homepage' %}">Home</a>
-        <a href="{% url 'courses:list' %}">Courses</a>
+    <div
+        class="wrapper">
 
-        {% if not request.user.is_authenticated %}
-        <a href="{% url 'login' %}">Log In</a>
-        <a href="{% url 'register' %}">Register</a>
-        {% else %}
-        <a href="{% url 'logout' %}">Log Out</a>
-        {% endif %}
-        </nav>
-        {% block header-content %}
-        {% endblock %}
-        {% if messages %}
-            <ul class="messages">
+        <header>
+            <nav
+              class="navbar navbar-default site-nav">
+                <div
+                  class="container-fluid">
+                    <div
+                      class="navbar-header">
+
+                        <button
+                          type="button"
+                          class="navbar-toggle collapsed"
+                          data-toggle="collapse"
+                          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+
+                        </button>
+
+                        <a
+                          class="navbar-brand"
+                          href="/">
+
+                            School of Mathematics
+                        </a>
+                    </div>
+
+                    <div
+                      class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul
+                          class="nav navbar-nav pull-right">
+
+                            <li>
+                                <a href="{% url 'homepage' %}">Home</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'courses:list' %}">Courses</a>
+                            </li>
+                            {% if not request.user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'login' %}">Log In</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'register' %}">Register</a>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a href="{% url 'logout' %}">Log Out</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div
+              class="jumbotron">
+
+                {% block header-content %}
+                {% endblock %}
+            </div>
+
+            {% if messages %}
                 {% for message in messages %}
-                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
-                    {{ message }}
-                </li>
+                    <div
+                      class="alert alert-info alert-dismissible"
+                      role="alert">
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="alert"
+                          aria-label="Close">
+
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                        {{ message }}
+
+                    </div>
                 {% endfor %}
-            </ul>
-        {% endif %}
-    </header>
-    <section>
+            {% endif %}
+        </header>
+
         {% block section-content %}
-            <h3>You can see the list of all available courses <a href="{% url 'courses:list' %}"> here</a></h3>
-            <div>
-                <h3>Also if you would like to suggest what course we should do next feel free to leave your
-                    suggestion <a href="{% url 'suggestion'%}">here</a><h3>
+            <div
+              class="punch text-center bg-info">
+
+                <p class="line"></p>
+
+                <p
+                  class="lead">
+
+                    You can see the list of all available courses
+                    <a
+                      href="{% url 'courses:list' %}">
+
+                        here
+                    </a>
+                </p>
+
+                <p
+                  class="lead">
+                    Also if you would like to suggest what course we should do next feel free to leave your suggestion
+
+                    <a
+                      href="{% url 'suggestion'%}">
+                        here
+                    </a>
+                </p>
             </div>
         {% endblock %}
-    </section>
-    <footer>
-        <p>&copy; 2017 School of mathematics</p>
+
+    </div>
+
+    <footer
+      class="footer"
+        id="footer">
+
+        <div
+          class="container">
+
+            <p
+              class="text-muted text-center">
+
+                &copy; 2017 School of mathematics
+            </p>
+        </div>
     </footer>
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/sticky-footer.js' %}"></script>
 </body>
 </html>
