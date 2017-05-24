@@ -12,22 +12,22 @@ $(window).bind("load", function() {
         footerHeight = $footer.height();
         footerTop = ($(window).scrollTop()+$(window).height()-footerHeight)+"px";
 
-        if ( ($(document.body).height()+footerHeight) < $(window).height()) {
+        if ( ($(document.body).height() + footerHeight) < $(window).height()) {
             $footer.css({
                 position: "absolute"
             }).animate({
                 top: footerTop
-            })
+            });
         } else {
             $footer.css({
                 position: "static"
-            })
+            });
         }
 
     }
 
     $(window)
         .scroll(positionFooter)
-        .resize(positionFooter)
+        .resize(positionFooter);
 
 });
