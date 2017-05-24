@@ -44,17 +44,27 @@
     {% for course in courses %}
 
         <div
-          class="panel info">
+          class="panel panel-courses">
 
             {% now "F" as current_month %}
             {% if current_month == course.created_at|date:'F' %}
-            <h4
-                class="text-center text-primary">
-                {{ course }}
-            </h4>
+            <h3
+                class="text-center text-primary course-title">
+                <a
+                  class="text-center"
+                  href="{% url 'courses:detail' pk=course.pk %}">
+
+                    {{ course.title }}
+                </a>
+            </h3>
             {% endif %}
         </div>
     {% endfor %}
+    <br>
+    <p
+        class="comming-soon text-center">
+        more comming soon...
+    </p>
 
     <br>
     <br>
