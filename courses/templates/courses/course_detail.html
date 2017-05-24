@@ -8,15 +8,46 @@
 {% endblock %}
 
 {% block header-content %}
-    <h2>{{ course.title }}</h2>
-    {{ course.description }}
+    <h2
+        class="text-center text-primary">
+        {{ course.title }}
+    </h2>
 
-    <p>There {{ course.video_set.count|pluralize:'is, are' }} {{ course.video_set.count|apnumber }}
-        step{{ course.video_set.count|pluralize }} in this course: {{ course.video_set.all|join:', ' }}</p>
+    <hr>
+    <br>
 
-    {% for step in steps %}
-    <h3><a href="{{ step.get_absolute_url }}">{{ step.title }}</a></h3>
-        {{ step.description }}
-    {% endfor %}
+    <p
+      class="lead text-center">
+        {{ course.description }}
+        <br>
+        <br>
+        There {{ course.video_set.count|pluralize:'is, are' }} {{ course.video_set.count|apnumber }}
+        step{{ course.video_set.count|pluralize }} in this course: {{ course.video_set.all|join:', ' }}
+    </p>
+
+    <br>
+
+    <ul
+      class="list-group"">
+        {% for step in steps %}
+            <li
+              class="list-group-item"">
+                <a
+                  href="{{ step.get_absolute_url }}">
+                    <br>
+                    <p
+                      class="line"></p>
+
+                    <h3 class="text-center text-primary text-light ">
+                            {{ step.title }}
+                    </h3>
+                    <p
+                      class="text-center">
+                        {{ step.description }}
+                    </p>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
 
